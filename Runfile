@@ -1,0 +1,17 @@
+require "runfile-tasks"
+require "byebug"
+require_relative 'lib/docspec'
+
+title   "Docspec Developer Toolbelt"
+summary "Runfile tasks for building the Docspec gem"
+version Docspec::VERSION
+
+RunfileTasks::RubyGems.all 'docspec'
+RunfileTasks::Testing.rspec
+
+help   "Run interactive console"
+action :console, :c do
+  run "bundle exec bin/console"
+end
+
+require './debug.rb' if File.exist? 'debug.rb'

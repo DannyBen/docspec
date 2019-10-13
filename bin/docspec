@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'simplecov'
+SimpleCov.start
+
+require 'docspec'
+require 'colsole'
+include Colsole
+
+document = ARGV[0] || 'README.md'
+abort "File not found #{document}" unless File.exist? document
+tester = Docspec::Tester.new document
+success = tester.execute
+
+if success
+  say "!txtgrn!#{tester.total} tests, #{tester.errors} failed"
+  if ENV['DOCSPEC_ALLOWED_FAILURES']
+    say "(allowed failures: #{ENV['DOCSPEC_ALLOWED_FAILURES']})"
+  end
+  say ''
+  exit 0
+else
+  say "!txtred!#{tester.total} tests, #{tester.errors} failed\n"
+  exit 1
+end
+
+
