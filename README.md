@@ -23,6 +23,16 @@ Usage
 Docspec expects one or more Markdown files with embedded code snippets to 
 test.
 
+Code snippets should be enclosed in a `ruby` or `shell` code fence:
+
+    ```ruby
+    code_to_test = 'here'
+    #=> expected output
+    ```
+
+This document itself serves as the test suite for this gem, so you can take a
+look at its source.
+
 
 ### Testing with the `docspec` command line
 
@@ -30,52 +40,29 @@ Test the examples in `./README.md`:
 
     $ docspec
 
-Test a a different file:
+Test a different file:
 
     $ docspec TESTS.md
 
 
-### Testing programatically
+### Testing from Ruby code
 
 ```ruby
-# [:skip]
-tester = Docspec::Tester.new 'README.md'
-success = tester.execute
+# Running from Ruby code
+document = Docspec::Document.from_file 'sample.md'
+document.test
+#=> pass : Sample Test
+
+puts document.success?
+#=> true
 ```
-
-
-Rules
---------------------------------------------------
-
-- Anything outside of a code fence is ignored.
-- Both `ruby` and `shell` code blocks are supported.
-- Inside a code block, any piece of code that we care about should print
-  something.
-- Inside a code block, anything starting with `#=>` should define the 
-  expected output.
-- If a piece of code raises an error, the captured output will be the 
-  `#inspect` string of that exception.
-- If the first line of a code block includes the string `[:ignore_failure]`, 
-  the example will not be considered an error if it fails.
-- If the first line of a code block includes the string `[:skip]`, 
-  it will be completely ignored.
-
-
-To test the `README.md` in the current folder, just run:
-
-    $ docspec
-
-To test a different file, provide it as the first argument:
-
-    $ docspec TESTS.md
 
 
 Examples
 --------------------------------------------------
 
-These will be tested with `docspec`:
-
-### Ruby
+Code examples that you want to test, should output something to stdout. 
+Specify the expected output by prefixing it with `#=>`:
 
 ```ruby
 # The first line is an optional label
@@ -83,11 +70,16 @@ puts 'hello world'.upcase
 #=> HELLO WORLD
 ```
 
+If an example raises an exception, the captured output will be the `#inspect`
+string of that exception:
+
 ```ruby
 # Exceptions are captured
 raise ArgumentError, "Testing error raising"
 #=> #<ArgumentError: Testing error raising>
 ```
+
+Your code and expected output can contain multiple lines of code:
 
 ```ruby
 # Multiple lines of code
@@ -100,6 +92,8 @@ end
 #=> hello
 ```
 
+and you can alternate between code and expected output:
+
 ```ruby
 # Interleaving code and output 
 puts 2 + 3
@@ -109,6 +103,13 @@ puts 2 - 3
 #=> -1
 ```
 
+The first line of the example may contain specially formatted flags. Flags 
+are always formatted like this: `[:flag_name]`. 
+
+The `[:ignore_failure]` flag allows the example to fail. It will show the 
+failure in the output, but will not elevate the exit status to a failure 
+state:
+
 ```ruby
 # This example may fail [:ignore_failure]
 # Due to the :ignore_failure flag, it will show the failure diff, but will
@@ -117,26 +118,43 @@ puts 'hello world'.upcase
 #=> hello world
 ```
 
+Another available flag, is the `[:skip]` flag, which will omit the example
+from the test run:
+
 ```ruby
-# Code that does not generate any output will be executed before each
-# of the subsequent examples.
+# [:skip]
+this will not be executed
+```
+
+Sometimes it is useful to build the example over several different code 
+blocks. To help achieve this, docspec will treat any example that does not 
+output anything as a code that needs to be executed before all subsequent 
+examples:
+
+```ruby
+# Define a function for later use
 def create_caption(text)
   [text.upcase, ("=" * text.length)].join "\n"
 end
 ```
 
+All the examples below this line, will have the above function available:
+
 ```ruby
-# Example that builds upon code that was defined earlier
+# Use a previously defined function
 puts create_caption "tada!"
 #=> TADA!
 #=> =====
 ```
 
 
-### Shell
+Finally, examples marked with a `shell` code fence will be executed by the
+shell, and not by ruby:
 
 ```shell
 # Shell commands
 echo hello world
 #=> hello world
 ```
+
+

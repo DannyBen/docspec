@@ -1,13 +1,14 @@
 module Docspec
   class Document
-    attr_reader :filename
+    include Testable
+    attr_reader :filename, :markdown
 
-    def initialize(filename)
-      @filename = filename
+    def self.from_file(filename)
+      new File.read(filename)
     end
 
-    def markdown
-      @markdown ||= File.read filename
+    def initialize(markdown)
+      @markdown = markdown
     end
 
     def examples
