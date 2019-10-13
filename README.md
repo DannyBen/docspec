@@ -35,6 +35,9 @@ Rules
   expected output.
 - If a piece of code raises an error, the captured output will be the 
   `#inspect` string of that exception.
+- If the first line of a code block includes the string `[:ignore_failure]`, 
+  the example will not be considered an error if it fails.
+
 
 To test the `README.md` in the current folder, just run:
 
@@ -85,10 +88,28 @@ puts 2 - 3
 ```
 
 ```ruby
-# This example should fail
+# This example may fail [:ignore_failure]
+# Due to the :ignore_failure flag, it will show the failure diff, but will
+# not be considered a failure in the exit status.
 puts 'hello world'.upcase
 #=> hello world
 ```
+
+```ruby
+# Code that does not generate any output will be executed before each
+# of the subsequent examples.
+def create_caption(text)
+  [text.upcase, ("=" * text.length)].join "\n"
+end
+```
+
+```ruby
+# Example that builds upon code that was defined earlier
+puts create_caption "tada!"
+#=> TADA!
+#=> =====
+```
+
 
 ### Shell
 

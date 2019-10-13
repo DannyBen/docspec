@@ -3,49 +3,70 @@ require 'diffy'
 module Docspec
   class Example
     include OutputCapturer
-
-    attr_reader :code, :type
+    attr_reader :code, :type, :full_code
 
     def initialize(code, type)
       @code, @type = code, type
-    end
-
-    def label
-      @label ||= label!
-    end
-
-    def expected
-      @expected ||= code.scan(/#=>\s*(.*)/).map { |match| match.first.strip }.join "\n"
+      @full_code = @code
     end
 
     def actual
       @actual ||= actual!
     end
 
-    def passing?
+    def diff
+      @diff ||= Diffy::Diff.new("#{expected}\n", "#{actual}\n", context: 2).to_s :color
+    end
+
+    def empty?
+      actual.empty?
+    end
+
+    def expected
+      @expected ||= code.scan(/#=>\s*(.*)/).map { |match| match.first.strip }.join "\n"
+    end
+
+    def first_line
+      @first_line ||= code.split("\n").first
+    end
+
+    def flags
+      @flags ||= first_line.scan(/\[:(.+?)\]/).map { |f| f.first.to_sym }
+    end
+
+    def ignore_failure?
+      flags.include? :ignore_failure
+    end
+
+    def label
+      @label ||= label!
+    end
+
+    def prepend(codes)
+      codes = [codes] unless codes.is_a? Array
+      codes = codes.join "\n\n"
+      @full_code = "#{codes}\n#{@full_code}"
+    end
+
+    def success?
       actual == expected
     end
 
-    def diff
-      Diffy::Diff.new(expected, actual, context: 2).to_s :color
-    end
-
   protected
-
-    def label!
-      first_line = code.split("\n").first
-      first_line.gsub(/^#\s*/, '').strip
-    end
 
     def actual!
       capture_output do
         case type
         when 'ruby'
-          instance_eval(code)
+          eval full_code
         when 'shell'
           puts `#{code}`
         end
       end.strip
+    end
+
+    def label!
+      first_line.gsub(/^#\s*/, '').strip
     end
 
   end
