@@ -60,7 +60,7 @@ module Docspec
         when 'ruby'
           eval full_code
         when 'shell'
-          puts `#{full_code}`
+          puts `#{code}`
         end
       end.strip
     end
