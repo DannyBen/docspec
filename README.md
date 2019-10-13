@@ -5,7 +5,8 @@ Docspec
 [![Build Status](https://travis-ci.com/DannyBen/docspec.svg?branch=master)](https://travis-ci.com/DannyBen/docspec)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e0c15c1f33fa4aa45f70/maintainability)](https://codeclimate.com/github/DannyBen/docspec/maintainability)
 
-Inline tests in Markdown documents.
+Docspec lets you reuse your Markdown documents as the unit tests for your
+Ruby library.
 
 ---
 
