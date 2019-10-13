@@ -1,7 +1,25 @@
 Docspec
 ==================================================
 
+[![Gem Version](https://badge.fury.io/rb/docspec.svg)](https://badge.fury.io/rb/docspec)
+
 Inline tests in Markdown documents.
+
+---
+
+
+Installation
+--------------------------------------------------
+
+    $ gem install docspec
+
+
+Usage
+--------------------------------------------------
+
+Add ruby or shell code blocks to your `README.md` document, then run 
+`docspec` to evaluate them.
+
 
 Rules
 --------------------------------------------------
@@ -22,6 +40,7 @@ To test the `README.md` in the current folder, just run:
 To test a different file, provide it as the first argument:
 
     $ docspec TESTS.md
+
 
 Examples
 --------------------------------------------------
