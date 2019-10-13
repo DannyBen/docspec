@@ -42,10 +42,6 @@ module Docspec
       @label ||= label!
     end
 
-    def must_fail?
-      flags.include? :must_fail
-    end
-
     def prepend(codes)
       codes = [codes] unless codes.is_a? Array
       codes = codes.join "\n\n"
@@ -53,7 +49,7 @@ module Docspec
     end
 
     def success?
-      must_fail? ? actual != expected : actual == expected
+      actual == expected
     end
 
   protected

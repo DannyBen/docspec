@@ -38,6 +38,7 @@ Rules
 - If the first line of a code block includes the string `[:ignore_failure]`, 
   the example will not be considered an error if it fails.
 
+
 To test the `README.md` in the current folder, just run:
 
     $ docspec
@@ -92,12 +93,6 @@ puts 2 - 3
 # not be considered a failure in the exit status.
 puts 'hello world'.upcase
 #=> hello world
-```
-
-```ruby
-# This example must fail [:must_fail]
-puts "this is a success"
-#=> this is a failure
 ```
 
 ```ruby
