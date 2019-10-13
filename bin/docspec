@@ -9,11 +9,11 @@ include Colsole
 document = ARGV[0] || 'README.md'
 abort "File not found #{document}" unless File.exist? document
 tester = Docspec::Tester.new document
-success = tester.execute
+tester.execute
 
 say ''
 
-if success
+if tester.success?
   say "!txtgrn!#{tester.total} tests, #{tester.errors} failed\n"
   exit 0
 else

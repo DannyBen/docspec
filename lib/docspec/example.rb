@@ -48,6 +48,10 @@ module Docspec
       @full_code = "#{codes}\n#{@full_code}"
     end
 
+    def skip?
+      flags.include? :skip
+    end
+
     def success?
       actual == expected
     end

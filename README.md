@@ -20,8 +20,28 @@ Installation
 Usage
 --------------------------------------------------
 
-Add ruby or shell code blocks to your `README.md` document, then run 
-`docspec` to evaluate them.
+Docspec expects one or more Markdown files with embedded code snippets to 
+test.
+
+
+### Testing with the `docspec` command line
+
+Test the examples in `./README.md`:
+
+    $ docspec
+
+Test a a different file:
+
+    $ docspec TESTS.md
+
+
+### Testing programatically
+
+```ruby
+# [:skip]
+tester = Docspec::Tester.new 'README.md'
+success = tester.execute
+```
 
 
 Rules
@@ -37,6 +57,8 @@ Rules
   `#inspect` string of that exception.
 - If the first line of a code block includes the string `[:ignore_failure]`, 
   the example will not be considered an error if it fails.
+- If the first line of a code block includes the string `[:skip]`, 
+  it will be completely ignored.
 
 
 To test the `README.md` in the current folder, just run:

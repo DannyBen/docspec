@@ -19,7 +19,8 @@ module Docspec
     def examples!
       result = []
       markdown.scan(/```(ruby|shell)\s*\n(.*?)```/m) do |type, code|
-        result << Example.new(code, type)
+        example = Example.new(code, type)
+        result << example unless example.skip?
       end
       result
     end
