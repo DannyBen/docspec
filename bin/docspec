@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 require 'simplecov'
+SimpleCov.configure do
+  command_name 'Docspec'
+end
 SimpleCov.start
 
 require 'docspec'

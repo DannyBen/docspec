@@ -17,14 +17,7 @@ module Docspec
       reset_counters
 
       examples.each do |example|
-        if example.empty?
-          before_codes << example.code
-        else
-          @total_examples += 1
-          example.prepend before_codes
-          @failed_examples += 1 unless example.success? or example.ignore_failure?
-        end
-        
+        process_example example
         yield example
       end
     end
@@ -45,6 +38,16 @@ module Docspec
     end
 
   protected
+
+    def process_example(example)
+      if example.empty?
+        before_codes << example.code
+      else
+        @total_examples += 1
+        example.prepend before_codes
+        @failed_examples += 1 unless example.success? or example.ignore_failure?
+      end
+    end
 
     def reset_counters
       @before_codes = nil
