@@ -18,7 +18,7 @@ module Docspec
 
     def examples!
       result = []
-      markdown.scan(/```(ruby|shell)\n(.*?)```/m) do |type, code|
+      markdown.scan(/```(ruby|shell)\s*\n(.*?)```/m) do |type, code|
         result << Example.new(code, type)
       end
       result
