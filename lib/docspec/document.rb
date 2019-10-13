@@ -1,13 +1,14 @@
 module Docspec
   class Document
-    attr_reader :filename
+    include Testable
+    attr_reader :filename, :markdown
 
-    def initialize(filename)
-      @filename = filename
+    def self.from_file(filename)
+      new File.read(filename)
     end
 
-    def markdown
-      @markdown ||= File.read filename
+    def initialize(markdown)
+      @markdown = markdown
     end
 
     def examples
@@ -19,7 +20,8 @@ module Docspec
     def examples!
       result = []
       markdown.scan(/```(ruby|shell)\s*\n(.*?)```/m) do |type, code|
-        result << Example.new(code, type)
+        example = Example.new(code, type)
+        result << example unless example.skip?
       end
       result
     end
