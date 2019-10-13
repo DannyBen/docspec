@@ -11,6 +11,8 @@ abort "File not found #{document}" unless File.exist? document
 tester = Docspec::Tester.new document
 success = tester.execute
 
+say ''
+
 if tester.expected_failures != 0
   say "!txtblu!Expected failures: #{tester.expected_failures}"
 end
