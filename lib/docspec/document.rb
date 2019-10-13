@@ -10,22 +10,18 @@ module Docspec
       @markdown ||= File.read filename
     end
 
-    def blocks
-      @blocks ||= blocks!
-    end
-
     def examples
       @examples ||= examples!
     end
 
   protected
 
-    def blocks!
-       markdown.scan(/```ruby(.*?)```/m).map { |match| match.first.strip }
-    end
-
     def examples!
-      blocks.map { |code| Example.new code }
+      result = []
+      markdown.scan(/```(ruby|shell)\n(.*?)```/m) do |type, code|
+        result << Example.new(code, type)
+      end
+      result
     end
 
   end

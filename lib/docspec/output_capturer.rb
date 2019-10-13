@@ -7,7 +7,7 @@ module Docspec
         yield
         $stdout.string
       rescue => e
-        "#{$stdout.string}#{e.class}: #{e.message}"
+        "#{$stdout.string}#{e.inspect}"
       ensure
         $stdout = original_stdout
       end

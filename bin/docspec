@@ -11,12 +11,12 @@ abort "File not found #{document}" unless File.exist? document
 tester = Docspec::Tester.new document
 success = tester.execute
 
+if tester.expected_failures != 0
+  say "!txtblu!Expected failures: #{tester.expected_failures}"
+end
+
 if success
-  say "!txtgrn!#{tester.total} tests, #{tester.errors} failed"
-  if ENV['DOCSPEC_ALLOWED_FAILURES']
-    say "(allowed failures: #{ENV['DOCSPEC_ALLOWED_FAILURES']})"
-  end
-  say ''
+  say "!txtgrn!#{tester.total} tests, #{tester.errors} failed\n"
   exit 0
 else
   say "!txtred!#{tester.total} tests, #{tester.errors} failed\n"

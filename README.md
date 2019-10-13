@@ -1,18 +1,37 @@
 Docspec
 ==================================================
 
-Rules:
+Inline tests in Markdown documents.
 
-- Anything outside of a ruby code fence is ignored.
-- Inside a code block, anything piece of code that we care about should 
-  print something to screen.
+Rules
+--------------------------------------------------
+
+- Anything outside of a code fence is ignored.
+- Both `ruby` and `shell` code blocks are supported.
+- Inside a code block, any piece of code that we care about should print
+  something.
 - Inside a code block, anything starting with `#=>` should define the 
   expected output.
-- If a piece of code raises an error, the captured output will be
-  formatted as `ExceptionType: message`.
+- If a piece of code raises an error, the captured output will be the 
+  `#inspect` string of that exception.
+
+To test the `README.md` in the current folder, just run:
+
+    $ docspec
+
+To test a different file, provide it as the first argument:
+
+    $ docspec TESTS.md
+
+Examples
+--------------------------------------------------
+
+These will be tested with `docspec`:
+
+### Ruby
 
 ```ruby
-# Ths first line is an optional label
+# The first line is an optional label
 puts 'hello world'.upcase
 #=> HELLO WORLD
 ```
@@ -20,7 +39,7 @@ puts 'hello world'.upcase
 ```ruby
 # Exceptions are captured
 raise ArgumentError, "Testing error raising"
-#=> ArgumentError: Testing error raising
+#=> #<ArgumentError: Testing error raising>
 ```
 
 ```ruby
@@ -46,5 +65,13 @@ puts 2 - 3
 ```ruby
 # This example should fail
 puts 'hello world'.upcase
+#=> hello world
+```
+
+### Shell
+
+```shell
+# Shell commands
+echo hello world
 #=> hello world
 ```

@@ -4,10 +4,10 @@ module Docspec
   class Example
     include OutputCapturer
 
-    attr_reader :code
+    attr_reader :code, :type
 
-    def initialize(code)
-      @code = code
+    def initialize(code, type)
+      @code, @type = code, type
     end
 
     def label
@@ -19,7 +19,7 @@ module Docspec
     end
 
     def actual
-      @actual ||= capture_output { instance_eval(code) }.strip
+      @actual ||= actual!
     end
 
     def passing?
@@ -35,6 +35,17 @@ module Docspec
     def label!
       first_line = code.split("\n").first
       first_line.gsub(/^#\s*/, '').strip
+    end
+
+    def actual!
+      capture_output do
+        case type
+        when 'ruby'
+          instance_eval(code)
+        when 'shell'
+          puts `#{code}`
+        end
+      end.strip
     end
 
   end

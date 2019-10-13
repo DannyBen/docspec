@@ -28,11 +28,11 @@ module Docspec
         end
       end
 
-      errors <= allowed_failures
+      errors == expected_failures
     end
 
-    def allowed_failures
-      ENV['DOCSPEC_ALLOWED_FAILURES']&.to_i || 0
+    def expected_failures
+      ENV['DOCSPEC_EXPECTED_FAILURES']&.to_i || 0
     end
   end
 end
