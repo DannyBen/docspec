@@ -5,7 +5,7 @@ module Docspec
   class CLI
     attr_reader :target, :exit_code, :total_examples, :failed_examples
 
-    def initialize(target)
+    def initialize(target=nil)
       @target = target || 'README.md'
     end
 
