@@ -15,13 +15,23 @@ module Docspec
       @examples ||= examples!
     end
 
+    def before
+      @before ||= {}
+    end
+
   protected
 
     def examples!
       result = []
       markdown.scan(/```(ruby|shell)\s*\n(.*?)```/m) do |type, code|
-        example = Example.new(code, type)
-        result << example unless example.skip?
+        example = Example.new(type: type, code: code, before: before[type])
+        
+        next if example.skip?
+
+        before[type] ||= []
+        before[type] << example.code if example.empty?
+        
+        result << example
       end
       result
     end

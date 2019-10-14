@@ -3,15 +3,18 @@ require 'diffy'
 module Docspec
   class Example
     include OutputCapturer
-    attr_reader :code, :type, :full_code
+    attr_reader :code, :type, :before
 
-    def initialize(code, type)
-      @code, @type = code, type
-      @full_code = @code
+    def initialize(type:, code:, before: nil)
+      @code, @type, @before = code, type, before
     end
 
     def actual
       @actual ||= actual!
+    end
+
+    def consider_failed?
+      failed? and !ignore_failure?
     end
 
     def diff
@@ -26,6 +29,10 @@ module Docspec
       @expected ||= code.scan(/#=>\s*(.*)/).map { |match| match.first.strip }.join "\n"
     end
 
+    def failed?
+      !success?
+    end
+
     def first_line
       @first_line ||= code.split("\n").first
     end
@@ -34,18 +41,16 @@ module Docspec
       @flags ||= first_line.scan(/\[:(.+?)\]/).map { |f| f.first.to_sym }
     end
 
+    def full_code
+      @full_code ||= full_code!
+    end
+
     def ignore_failure?
       flags.include? :ignore_failure
     end
 
     def label
       @label ||= label!
-    end
-
-    def prepend(codes)
-      codes = [codes] unless codes.is_a? Array
-      codes = codes.join "\n\n"
-      @full_code = "#{codes}\n#{@full_code}"
     end
 
     def skip?
@@ -64,9 +69,14 @@ module Docspec
         when 'ruby'
           eval full_code
         when 'shell'
-          puts `#{code}`
+          puts `#{full_code}`
         end
       end.strip
+    end
+
+    def full_code!
+      return code unless before
+      [before.join("\n\n"), code].join "\n"
     end
 
     def label!

@@ -157,7 +157,7 @@ puts create_caption message
 ```
 
 
-Finally, examples marked with a `shell` code fence will be executed by the
+Examples marked with a `shell` code fence will be executed by the
 shell, and not by ruby:
 
 ```shell
@@ -166,4 +166,16 @@ echo hello world
 #=> hello world
 ```
 
+and they also support chaining of examples:
+
+```shell
+# Prepend shell example to all subsequent shell examples
+# (since this example does not define an expected output)
+SOME_ENV_VAR=yes
+```
+
+```shell
+echo $SOME_ENV_VAR
+#=> yes
+```
 

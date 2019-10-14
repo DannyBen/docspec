@@ -17,10 +17,10 @@ document.test
 say ''
 
 if document.success?
-  say "!txtgrn!#{document.total_examples} tests, #{document.failed_examples} failed\n"
+  say "!txtgrn!#{document.examples.count} tests, #{document.failed_examples.count} failed\n"
   exit 0
 else
-  say "!txtred!#{document.total_examples} tests, #{document.failed_examples} failed\n"
+  say "!txtred!#{document.examples.count} tests, #{document.failed_examples.count} failed\n"
   exit 1
 end
 
