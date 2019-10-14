@@ -19,7 +19,7 @@ module Docspec
     end
 
     def empty?
-      actual.empty?
+      expected.empty?
     end
 
     def expected

@@ -43,8 +43,8 @@ module Docspec
       if example.empty?
         before_codes << example.code
       else
-        @total_examples += 1
         example.prepend before_codes
+        @total_examples += 1
         @failed_examples += 1 unless example.success? or example.ignore_failure?
       end
     end

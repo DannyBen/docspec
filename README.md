@@ -26,8 +26,8 @@ test.
 Code snippets should be enclosed in a `ruby` or `shell` code fence:
 
     ```ruby
-    code_to_test = 'here'
-    #=> expected output
+    puts "code to test (should output something)"
+    #=> code to test (should output something)
     ```
 
 This document itself serves as the test suite for this gem, so you can take a
@@ -103,6 +103,13 @@ puts 2 - 3
 #=> -1
 ```
 
+or have the expected output in the same line as its code:
+
+```ruby
+puts 2 * 3    #=> 6
+puts 'works'  #=> works
+```
+
 The first line of the example may contain specially formatted flags. Flags 
 are always formatted like this: `[:flag_name]`. 
 
@@ -128,21 +135,23 @@ this will not be executed
 
 Sometimes it is useful to build the example over several different code 
 blocks. To help achieve this, docspec will treat any example that does not 
-output anything as a code that needs to be executed before all subsequent 
-examples:
+expect any output (no `#=> markers`) as a code that needs to be executed
+before all subsequent examples:
 
 ```ruby
-# Define a function for later use
+# Define functions or variables for later use
 def create_caption(text)
   [text.upcase, ("=" * text.length)].join "\n"
 end
+
+message = 'tada!'
 ```
 
 All the examples below this line, will have the above function available:
 
 ```ruby
-# Use a previously defined function
-puts create_caption "tada!"
+# Use a previously defined function or variable
+puts create_caption message
 #=> TADA!
 #=> =====
 ```
