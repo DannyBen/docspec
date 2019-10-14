@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.executables = ['docspec']
   s.homepage    = 'https://github.com/dannyben/docspec'
   s.license     = 'MIT'
-  s.required_ruby_version = ">= 2.5.0"
+  s.required_ruby_version = ">= 2.3.0"
 
   s.add_runtime_dependency 'colsole', '~> 0.5'
   s.add_runtime_dependency 'diffy', '~> 3.3'
