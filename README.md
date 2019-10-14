@@ -75,8 +75,8 @@ string of that exception:
 
 ```ruby
 # Exceptions are captured
-raise ArgumentError, "Testing error raising"
-#=> #<ArgumentError: Testing error raising>
+puts "hello".camel_case
+#=> #<NoMethodError: undefined method `camel_case' for "hello":String>
 ```
 
 Your code and expected output can contain multiple lines of code:
