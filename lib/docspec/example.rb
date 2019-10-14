@@ -26,7 +26,7 @@ module Docspec
     end
 
     def expected
-      @expected ||= code.scan(/#=>\s*(.*)/).map { |match| match.first.strip }.join "\n"
+      @expected ||= code.scan(/#=> *(.*)/).map { |match| match.first.strip }.join "\n"
     end
 
     def failed?

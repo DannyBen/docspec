@@ -1,27 +1,15 @@
 #!/usr/bin/env ruby
-require 'simplecov'
-SimpleCov.configure do
-  command_name 'Docspec'
+if Gem.loaded_specs.has_key?('simplecov') and !ENV['DISABLE_SIMPLECOV']
+  require 'simplecov'
+  SimpleCov.configure do
+    command_name ENV['SIMPLECOV_COMMAND'] || 'Docspec'
+  end
+  SimpleCov.start
 end
-SimpleCov.start
 
 require 'docspec'
-require 'colsole'
-include Colsole
+require 'docspec/cli'
 
-document = ARGV[0] || 'README.md'
-abort "File not found #{document}" unless File.exist? document
-document = Docspec::Document.from_file document
-document.test
-
-say ''
-
-if document.success?
-  say "!txtgrn!#{document.examples.count} tests, #{document.failed_examples.count} failed\n"
-  exit 0
-else
-  say "!txtred!#{document.examples.count} tests, #{document.failed_examples.count} failed\n"
-  exit 1
-end
-
-
+runner = Docspec::CLI.new ARGV[0]
+success = runner.run
+exit success ? 0 : 1
