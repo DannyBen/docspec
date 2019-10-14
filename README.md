@@ -36,26 +36,53 @@ look at its source.
 
 ### Testing with the `docspec` command line
 
-Test the examples in `./README.md`:
+- Running `docspec` without arguments will run on `./README.md`
+- Running `docspec` with a filename, will run on that filename
+- Running `docspec` with a directory, will run on all the markdown files in
+  that directory.
 
-    $ docspec
-
-Test a different file:
-
-    $ docspec TESTS.md
+If your bundle includes the `simplecov` gem, it will be automatically loaded
+and generate coverage report in the `coverage` directory.
 
 
 ### Testing from Ruby code
 
 ```ruby
 # Running from Ruby code
-document = Docspec::Document.from_file 'sample.md'
+document = Docspec::Document.from_file 'test/sample.md'
 document.test
 #=> pass : Sample Test
 
 puts document.success?
 #=> true
 ```
+
+
+
+
+```ruby
+# Test a file using the CLI class
+runner = Docspec::CLI.new 'test/sample.md'
+success = runner.run
+#=> pass : Sample Test
+#=> 
+#=> 1 tests, 0 failed
+```
+
+
+```ruby
+# Test a folder using the CLI class
+runner = Docspec::CLI.new 'test'
+success = runner.run
+#=> file : test/folder/another.md
+#=> pass : Another Sample Test
+#=> 
+#=> file : test/sample.md
+#=> pass : Sample Test
+#=> 
+#=> 2 tests, 0 failed
+```
+
 
 
 Examples

@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'colsole', '~> 0.5'
   s.add_runtime_dependency 'diffy', '~> 3.3'
-  s.add_runtime_dependency 'simplecov', '~> 0.17'
+  # s.add_runtime_dependency 'simplecov', '~> 0.17'
 end

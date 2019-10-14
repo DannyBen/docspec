@@ -11,3 +11,4 @@ before_install:
 
 script:
 - bundle exec docspec
+- bundle exec docspec test
