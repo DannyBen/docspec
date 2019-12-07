@@ -1,3 +1,5 @@
+require 'stringio'
+
 module Docspec
   module OutputCapturer
     def capture_output
