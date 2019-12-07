@@ -7,7 +7,6 @@ summary "Runfile tasks for building the Docspec gem"
 version Docspec::VERSION
 
 RunfileTasks::RubyGems.all 'docspec'
-RunfileTasks::Testing.rspec
 
 help   "Run interactive console"
 action :console, :c do
