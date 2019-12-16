@@ -1,6 +1,7 @@
 require "runfile-tasks"
 require "byebug"
 require_relative 'lib/docspec'
+require_relative 'lib/docspec/version'
 
 title   "Docspec Developer Toolbelt"
 summary "Runfile tasks for building the Docspec gem"
