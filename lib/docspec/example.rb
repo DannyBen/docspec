@@ -30,7 +30,7 @@ module Docspec
     end
 
     def failed?
-      !success?
+      !success? && !empty?
     end
 
     def first_line

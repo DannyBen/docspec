@@ -86,7 +86,14 @@ success = runner.run
 #=> file : test/sample.md
 #=> pass : Sample Test
 #=> 
-#=> 2 tests, 0 failed
+#=> file : test/sample2.md
+#=> pass : echo shell
+#=> void : echo shell
+#=> pass : puts "ruby"
+#=> void : puts "ruby"
+#=>
+#=> 6 tests, 0 failed
+
 ```
 
 
