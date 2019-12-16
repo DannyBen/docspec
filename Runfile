@@ -13,4 +13,12 @@ action :console, :c do
   run "bundle exec bin/console"
 end
 
+help   "Run tests"
+action :test, :t do
+  system "bundle exec docspec" and
+    system "bundle exec docspec test" and
+    say "!txtgrn!All good"
+end
+
+
 require './debug.rb' if File.exist? 'debug.rb'
