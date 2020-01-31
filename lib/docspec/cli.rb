@@ -33,7 +33,7 @@ module Docspec
 
     def run_dir
       all_success = true
-      Dir["#{target}/**/*.md"].each do |file|
+      Dir["#{target}/**/*.md"].sort.each do |file|
         say ''
         say "!txtcyn!file : #{file}"
         success = run_file file
