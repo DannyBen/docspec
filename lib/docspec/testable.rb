@@ -15,11 +15,11 @@ module Docspec
     def test
       examples.each do |example|
         if example.empty?
-          say "!txtpur!void :!txtrst! #{example.label}"          
+          say "m`void :` #{example.label}"          
         elsif example.success?
-          say "!txtgrn!pass :!txtrst! #{example.label}"
+          say "g`pass :` #{example.label}"
         else
-          say "!txtred!FAIL : #{example.label}"
+          say "r`FAIL : #{example.label}`"
           say "---"
           puts example.diff
           say "---"

@@ -35,7 +35,7 @@ module Docspec
       all_success = true
       Dir["#{target}/**/*.md"].sort.each do |file|
         say ''
-        say "!txtcyn!file : #{file}"
+        say "c`file : #{file}`"
         success = run_file file
         all_success = false unless success
       end
@@ -56,10 +56,10 @@ module Docspec
       say ''
 
       if failed_examples == 0
-        say "!txtgrn!#{total_examples} tests, #{failed_examples} failed\n"
+        say "g`#{total_examples} tests, #{failed_examples} failed`\n"
         true
       else
-        say "!txtred!#{total_examples} tests, #{failed_examples} failed\n"
+        say "r`#{total_examples} tests, #{failed_examples} failed`\n"
         false
       end
     end
