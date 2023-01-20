@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-if Gem.loaded_specs.has_key?('simplecov') and !ENV['DISABLE_SIMPLECOV']
+if Gem.loaded_specs.has_key?('simplecov') && !ENV['DISABLE_SIMPLECOV']
   require 'simplecov'
   SimpleCov.configure do
     command_name ENV['SIMPLECOV_COMMAND'] || 'Docspec'

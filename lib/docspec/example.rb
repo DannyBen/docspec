@@ -6,7 +6,9 @@ module Docspec
     attr_reader :code, :type, :before
 
     def initialize(type:, code:, before: nil)
-      @code, @type, @before = code, type, before
+      @code = code
+      @type = type
+      @before = before
     end
 
     def actual
@@ -76,12 +78,12 @@ module Docspec
 
     def full_code!
       return code unless before
+
       [before.join("\n\n"), code].join "\n"
     end
 
     def label!
       first_line.gsub(/^#\s*/, '').strip
     end
-
   end
 end

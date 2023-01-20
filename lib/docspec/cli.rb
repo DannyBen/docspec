@@ -5,7 +5,7 @@ module Docspec
   class CLI
     attr_reader :target, :exit_code, :total_examples, :failed_examples
 
-    def initialize(target=nil)
+    def initialize(target = nil)
       @target = target || 'README.md'
     end
 
@@ -35,7 +35,7 @@ module Docspec
       all_success = true
       Dir["#{target}/**/*.md"].sort.each do |file|
         say ''
-        say "!txtcyn!file : #{file}"
+        say "c`file : #{file}`"
         success = run_file file
         all_success = false unless success
       end
@@ -45,27 +45,23 @@ module Docspec
     def run_file(file)
       document = Docspec::Document.from_file file
       document.test
-      
+
       @failed_examples += document.failed_examples.count
       @total_examples += document.examples.count
-      
+
       document.success?
     end
 
     def show_footer
       say ''
 
-      if failed_examples == 0
-        say "!txtgrn!#{total_examples} tests, #{failed_examples} failed\n"
+      if failed_examples.zero?
+        say "g`#{total_examples} tests, #{failed_examples} failed`\n"
         true
       else
-        say "!txtred!#{total_examples} tests, #{failed_examples} failed\n"
+        say "r`#{total_examples} tests, #{failed_examples} failed`\n"
         false
       end
     end
-
   end
 end
-
-
-
