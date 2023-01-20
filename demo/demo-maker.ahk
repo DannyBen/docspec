@@ -1,10 +1,10 @@
 ; --------------------------------------------------
 ; This script generates the demo svg
+; NOTE: This should be executed in the repo root
 ; --------------------------------------------------
 #SingleInstance Force
 SetkeyDelay 0, 60
 
-; NOTE: This should be executed in the demo folder
 
 Return
 
@@ -17,8 +17,10 @@ Type(Command, Delay=1000) {
 }
 
 F12::
+  Type("{#} Press F11 to abort at any time")
+  Type("cd ./demo")
   Type("rm README.md")
-  Type("termtosvg cast.svg -t window_frame")
+  Type("rm -f cast.json {;} asciinema rec cast.json")
 
   Type("{#} Create a markdown document", 500)
   Type("vi README.md")
@@ -30,6 +32,10 @@ F12::
   Type("docspec", 5000)
 
   Type("exit")
+  Type("agg --font-size 20 cast.json cast.gif")
+  Sleep 400
+  Type("cd ..")
+  Type("{#} Done")
 Return
 
 ^F12::

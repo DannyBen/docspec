@@ -19,7 +19,7 @@ $ gem install docspec
 
 ## Demo
 
-![Demo](demo/cast.svg)
+![Demo](demo/cast.gif)
 
 
 ## Usage
