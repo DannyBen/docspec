@@ -1,5 +1,4 @@
-Docspec
-==================================================
+# Docspec
 
 [![Gem Version](https://badge.fury.io/rb/docspec.svg)](https://badge.fury.io/rb/docspec)
 [![Build Status](https://github.com/DannyBen/docspec/workflows/Test/badge.svg)](https://github.com/DannyBen/docspec/actions?query=workflow%3ATest)
@@ -11,30 +10,29 @@ Ruby library.
 ---
 
 
-Installation
---------------------------------------------------
+## Installation
 
-    $ gem install docspec
+```
+$ gem install docspec
+```
 
 
-Demo
---------------------------------------------------
+## Demo
 
 ![Demo](demo/cast.svg)
 
 
-Usage
---------------------------------------------------
+## Usage
 
 Docspec expects one or more Markdown files with embedded code snippets to 
 test.
 
 Code snippets should be enclosed in a `ruby` or `shell` code fence:
 
-    ```ruby
-    puts "code to test (should output something)"
-    #=> code to test (should output something)
-    ```
+```ruby
+puts "code to test (should output something)"
+#=> code to test (should output something)
+```
 
 This document itself serves as the test suite for this gem, so you can take a
 look at its source.
@@ -98,8 +96,7 @@ success = runner.run
 
 
 
-Examples
---------------------------------------------------
+## Examples
 
 Code examples that you want to test, should output something to stdout. 
 Specify the expected output by prefixing it with `#=>`:
@@ -218,4 +215,3 @@ SOME_ENV_VAR=yes
 echo $SOME_ENV_VAR
 #=> yes
 ```
-

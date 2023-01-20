@@ -5,7 +5,7 @@ module Docspec
     include Colsole
 
     def success?
-      failed_examples.count == 0
+      failed_examples.count.zero?
     end
 
     def failed_examples
@@ -15,18 +15,16 @@ module Docspec
     def test
       examples.each do |example|
         if example.empty?
-          say "m`void :` #{example.label}"          
+          say "m`void :` #{example.label}"
         elsif example.success?
           say "g`pass :` #{example.label}"
         else
           say "r`FAIL : #{example.label}`"
-          say "---"
+          say '---'
           puts example.diff
-          say "---"
+          say '---'
         end
       end
     end
-
   end
 end
-

@@ -25,16 +25,15 @@ module Docspec
       result = []
       markdown.scan(/```(ruby|shell)\s*\n(.*?)```/m) do |type, code|
         example = Example.new(type: type, code: code, before: before[type])
-        
+
         next if example.skip?
 
         before[type] ||= []
         before[type] << example.code if example.empty?
-        
+
         result << example
       end
       result
     end
-
   end
 end

@@ -5,7 +5,7 @@ module Docspec
   class CLI
     attr_reader :target, :exit_code, :total_examples, :failed_examples
 
-    def initialize(target=nil)
+    def initialize(target = nil)
       @target = target || 'README.md'
     end
 
@@ -45,17 +45,17 @@ module Docspec
     def run_file(file)
       document = Docspec::Document.from_file file
       document.test
-      
+
       @failed_examples += document.failed_examples.count
       @total_examples += document.examples.count
-      
+
       document.success?
     end
 
     def show_footer
       say ''
 
-      if failed_examples == 0
+      if failed_examples.zero?
         say "g`#{total_examples} tests, #{failed_examples} failed`\n"
         true
       else
@@ -63,9 +63,5 @@ module Docspec
         false
       end
     end
-
   end
 end
-
-
-
