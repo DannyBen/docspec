@@ -1,25 +1,17 @@
-require "runfile-tasks"
 require "byebug"
-require_relative 'lib/docspec'
-require_relative 'lib/docspec/version'
+require 'docspec'
+require 'docspec/version'
 
 title   "Docspec Developer Toolbelt"
 summary "Runfile tasks for building the Docspec gem"
 version Docspec::VERSION
 
-RunfileTasks::RubyGems.all 'docspec'
-
-help   "Run interactive console"
-action :console, :c do
-  system "bundle exec bin/console"
-end
+import_gem 'runfile-tasks/gem'
+import 'debug'
 
 help   "Run tests"
 action :test, :t do
-  system "bundle exec docspec" and
-    system "bundle exec docspec test" and
-    puts "All good"
+  system "bundle exec docspec"
+  system "bundle exec docspec test"
 end
 
-
-require './debug.rb' if File.exist? 'debug.rb'
