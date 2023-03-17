@@ -3,46 +3,45 @@ include Colsole
 
 module Docspec
   class CLI
-    attr_reader :target, :exit_code, :total_examples, :failed_examples
+    attr_reader :targets, :exit_code, :total_examples, :failed_examples
 
-    def initialize(target = nil)
-      @target = target || 'README.md'
-    end
-
-    def mode
-      File.directory?(target) ? :dir : :file
+    def initialize(*targets)
+      targets = ['README.md'] if targets.empty?
+      @targets = targets
     end
 
     def run
-      abort "Target not found: #{target}" unless File.exist? target
-
       @exit_code = 0
       @total_examples = 0
       @failed_examples = 0
 
-      if mode == :dir
-        run_dir
-      else
-        run_file target
-      end
+      targets.each { |target| run_target target }
 
       show_footer
     end
 
   private
 
-    def run_dir
-      all_success = true
-      Dir["#{target}/**/*.md"].sort.each do |file|
-        say ''
-        say "c`file : #{file}`"
-        success = run_file file
-        all_success = false unless success
+    def run_target(target)
+      abort "Target not found: #{target}" unless File.exist? target
+
+      if File.directory? target
+        run_dir target
+      else
+        run_file target
       end
-      all_success
+    end
+
+    def run_dir(dir)
+      Dir["#{dir}/**/*.md"].sort.each do |file|
+        run_file file
+      end
     end
 
     def run_file(file)
+      say ''
+      say "c`file : #{file}`"
+
       document = Docspec::Document.from_file file
       document.test
 

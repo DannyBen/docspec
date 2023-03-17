@@ -10,6 +10,6 @@ end
 require 'docspec'
 require 'docspec/cli'
 
-runner = Docspec::CLI.new ARGV[0]
+runner = Docspec::CLI.new(*ARGV)
 success = runner.run
 exit success ? 0 : 1

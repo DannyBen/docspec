@@ -68,6 +68,7 @@ puts document.success?
 # Test a file using the CLI class
 runner = Docspec::CLI.new 'test/sample.md'
 success = runner.run
+#=> file : test/sample.md
 #=> pass : Sample Test
 #=> 
 #=> 1 tests, 0 failed
@@ -75,8 +76,8 @@ success = runner.run
 
 
 ```ruby
-# Test a folder using the CLI class
-runner = Docspec::CLI.new 'test'
+# Test multiple folders/files using the CLI class
+runner = Docspec::CLI.new 'test', 'test/sample.md'
 success = runner.run
 #=> file : test/folder/another.md
 #=> pass : Another Sample Test
@@ -89,8 +90,11 @@ success = runner.run
 #=> void : echo shell
 #=> pass : puts "ruby"
 #=> void : puts "ruby"
+#=> 
+#=> file : test/sample.md
+#=> pass : Sample Test
 #=>
-#=> 6 tests, 0 failed
+#=> 7 tests, 0 failed
 
 ```
 

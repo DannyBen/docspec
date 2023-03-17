@@ -68,10 +68,8 @@ module Docspec
     def actual!
       capture_output do
         case type
-        when 'ruby'
-          eval full_code
-        when 'shell'
-          puts `#{full_code}`
+        when 'ruby' then eval full_code
+        when 'shell' then puts `#{full_code}`
         end
       end.strip
     end
