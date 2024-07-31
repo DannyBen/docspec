@@ -117,7 +117,16 @@ string of that exception:
 ```ruby
 # Exceptions are captured
 puts "hello".camel_case
-#=> #<NoMethodError: undefined method `camel_case' for "hello":String>
+#=> #<NoMethodError: undefined method `camel_case' for ...
+```
+
+Using three dots at the beginning or end of the expected output (like in the
+above example) will perform a partial match:
+
+```ruby
+# Ellipsis match
+puts "the beginning will be ignored as well as the end"
+#=> ... will be ignored ...
 ```
 
 Your code and expected output can contain multiple lines of code:
