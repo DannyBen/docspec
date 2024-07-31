@@ -117,7 +117,7 @@ string of that exception:
 ```ruby
 # Exceptions are captured
 puts "hello".camel_case
-#=> #<NoMethodError: undefined method `camel_case' for "hello":String>
+#=> #<NoMethodError: undefined method `camel_case' for an instance of String>
 ```
 
 Your code and expected output can contain multiple lines of code:

@@ -1,8 +1,9 @@
 require 'colsole'
-include Colsole
 
 module Docspec
   class CLI
+    include Colsole
+
     attr_reader :targets, :exit_code, :total_examples, :failed_examples
 
     def initialize(*targets)
@@ -33,7 +34,7 @@ module Docspec
     end
 
     def run_dir(dir)
-      Dir["#{dir}/**/*.md"].sort.each do |file|
+      Dir["#{dir}/**/*.md"].each do |file|
         run_file file
       end
     end

@@ -14,10 +14,15 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/dannyben/docspec'
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 2.7'
+  s.required_ruby_version = '>= 3.1'
 
-  s.add_runtime_dependency 'colsole', '>= 0.8.1', '< 2.0'
-  s.add_runtime_dependency 'diffy', '~> 3.3'
+  s.add_dependency 'colsole', '>= 0.8.1', '< 2.0'
+  s.add_dependency 'diffy', '~> 3.3'
 
-  s.metadata['rubygems_mfa_required'] = 'true'
+  s.metadata = {
+    'bug_tracker_uri'       => 'https://github.com/DannyBen/docspec/issues',
+    'changelog_uri'         => 'https://github.com/DannyBen/docspec/blob/master/CHANGELOG.md',
+    'source_code_uri'       => 'https://github.com/DannyBen/docspec',
+    'rubygems_mfa_required' => 'true',
+  }
 end
