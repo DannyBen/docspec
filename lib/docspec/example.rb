@@ -3,6 +3,8 @@ require 'diffy'
 module Docspec
   class Example
     include OutputCapturer
+    using StringRefinements
+
     attr_reader :code, :type, :before
 
     def initialize(type:, code:, before: nil)
@@ -60,7 +62,11 @@ module Docspec
     end
 
     def success?
-      actual == expected
+      if expected.include? '...'
+        expected.ellipses_match? actual
+      else
+        actual == expected
+      end
     end
 
   protected

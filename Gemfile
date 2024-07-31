@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'runfile'
-gem 'runfile-tasks'
-gem 'simplecov'
+group :development do
+  gem 'debug'
+  gem 'runfile', require: false
+  gem 'runfile-tasks', require: false
+end
+
+group :test do
+  gem 'simplecov'
+end
 
 gemspec
