@@ -11,6 +11,13 @@ import 'debug'
 
 help   "Run tests"
 action :test, :t do
-  system "bundle exec docspec && bundle exec docspec test"
+  success = system "bundle exec docspec && bundle exec docspec test"
+  if success
+    say 'g`PASS`'
+    0
+  else
+    say 'f`FAIL`'
+    1
+  end
 end
 

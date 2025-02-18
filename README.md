@@ -106,7 +106,7 @@ Code examples that you want to test, should output something to stdout.
 Specify the expected output by prefixing it with `#=>`:
 
 ```ruby
-# The first line is an optional label
+# The first comment line is an optional label
 puts 'hello world'.upcase
 #=> HELLO WORLD
 ```
@@ -117,7 +117,7 @@ string of that exception:
 ```ruby
 # Exceptions are captured
 puts "hello".camel_case
-#=> #<NoMethodError: undefined method `camel_case' for ...
+#=> #<NoMethodError: undefined method ...
 ```
 
 Using three dots at the beginning or end of the expected output (like in the
