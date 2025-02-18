@@ -23,3 +23,8 @@ Style/MixinUsage:
     - 'bin/*'
     - 'spec/spec_helper.rb'
     - 'lib/docspec/cli.rb'
+
+# This cop is wrongly applied to a string, which does not have `#drop`
+Performance/ArraySemiInfiniteRangeSlice:
+  Exclude:
+    - 'lib/docspec/refinements.rb'

@@ -4,8 +4,8 @@ module Docspec
       def ellipses_match?(other)
         str = self
 
-        str = str[3..-1] if str.start_with?('...')
-        str = str[0..-4] if str.end_with?('...')
+        str = str[3..] if str.start_with?('...')
+        str = str[..-4] if str.end_with?('...')
 
         other.include?(str)
       end
