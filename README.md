@@ -1,9 +1,5 @@
 # Docspec
 
-[![Gem Version](https://badge.fury.io/rb/docspec.svg)](https://badge.fury.io/rb/docspec)
-[![Build Status](https://github.com/DannyBen/docspec/workflows/Test/badge.svg)](https://github.com/DannyBen/docspec/actions?query=workflow%3ATest)
-[![Maintainability](https://api.codeclimate.com/v1/badges/e0c15c1f33fa4aa45f70/maintainability)](https://codeclimate.com/github/DannyBen/docspec/maintainability)
-
 Docspec lets you reuse your Markdown documents as the unit tests for your
 Ruby library.
 
