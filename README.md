@@ -1,5 +1,7 @@
 # Docspec
 
+![repocard](https://repocard.dannyben.com/svg/docspec.svg)
+
 Docspec lets you reuse your Markdown documents as the unit tests for your
 Ruby library.
 
